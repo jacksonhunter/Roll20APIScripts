@@ -315,6 +315,10 @@ var DeathTracker = DeathTracker || (function () {
             if('undefined' !== typeof TokenMod && TokenMod.ObserveTokenChange){
                 TokenMod.ObserveTokenChange(handleBarValueChange);
             }
+            if('undefined' !== typeof ApplyDamage && ApplyDamage.registerObserver){
+            ApplyDamage.registerObserver("change", handleBarValueChange );
+            }
+
         },
 
         setDefaults = (reset) => {
