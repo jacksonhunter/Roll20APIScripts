@@ -1,5 +1,5 @@
 /*
- * Version 0.4.0
+ * Version 0.5.0
  *
  * Made By Robin Kuiper
  * Skype: RobinKuiper.eu
@@ -21,7 +21,13 @@
  * Name: Ammo Goettsch
  * Discord: ammo#7063
  * Roll20: https://app.roll20.net/users/2990964/ammo
- */
+ *
+ * Name: Kyle Broekers
+ * Discord: Cheshire#1092
+ * Roll20: https://app.roll20.net/users/1491687/kyle-b
+ * https://character-service.dndbeyond.com/character/v3/character/{characterId} 
+ * !beyond --import 
+  */
 
 (function() {
     const _ABILITIES = {1:'STR',2:'DEX',3:'CON',4:'INT',5:'WIS',6:'CHA'};
@@ -65,7 +71,8 @@
         'Bardic College', 
         'Roguish Archetype', 
         'Sacred Oath', 
-        'Martial Archetype'
+        'Martial Archetype',
+        'Artificer Specialist'
     ];
 
     const weapons = ['Club', 'Dagger', 'Greatclub', 'Handaxe', 'Javelin', 'Light Hammer', 'Mace', 'Quarterstaff', 'Sickle', 'Spear', 'Crossbow, Light', 'Dart', 'Shortbow', 'Sling', 'Battleaxe', 'Flail', 'Glaive', 'Greataxe', 'Greatsword', 'Halberd', 'Lance', 'Longsword', 'Maul', 'Morningstar', 'Pike', 'Rapier', 'Scimitar', 'Shortsword', 'Trident', 'War Pick', 'Warhammer', 'Whip', 'Blowgun', 'Crossbow, Hand', 'Crossbow, Heavy', 'Longbow', 'Net'];
@@ -174,7 +181,7 @@
         }
         
         let json = importData;
-        let character = JSON.parse(json).character;
+        let character = JSON.parse(json).data;
 
         sendChat(script_name, '<div style="'+style+'">Import of <b>' + character.name + '</b> is starting.</div>', null, {noarchive:true});
 
@@ -621,7 +628,7 @@
                     attributes["repeating_inventory_"+row+"_itemweight"] = (item.definition.bundleSize != 0 ? item.definition.weight / item.definition.bundleSize : item.definition.weight);
                     attributes["repeating_inventory_"+row+"_itemcontent"] = replaceChars(item.definition.description);
                     let _itemmodifiers = 'Item Type: ' + item.definition.type;
-                    if(typeof item.definition.damage === 'object' && item.definition.type !== 'Ammunition') {
+                    if(item.definition.damage != null && item.definition.type !== 'Ammunition') {
                         let properties = '';
                         let finesse = false;
                         let twohanded = false;
@@ -1712,7 +1719,7 @@
 
         let text = '<div style="'+style+'">';
         text += makeTitle(script_name + ' Help');
-        text += '<p>Go to a character on <a href="http://www.dndbeyond.com" target="_blank">D&D Beyond</a>, and put `/json` behind the link. Copy the full contents of this page and paste it behind the command `!beyond --import`.</p>';
+        text += '<p>Go to a character on <a href="http://www.dndbeyond.com" target="_blank">D&D Beyond</a>, and put `https://character-service.dndbeyond.com/character/v3/character/` before the number. Copy the full contents of this page and paste it behind the command `!beyond --import`.</p>';
         text += '<p>For more information take a look at my <a style="text-decoration: underline" href="https://github.com/sillvva/Roll20-API-Scripts/blob/master/5eOGL-DND-Beyond-Importer/BeyondImporter.js" target="_blank">Github</a> repository.</p>';
         text += '<hr>';
         text += '<b>Commands:</b>'+command_list;
